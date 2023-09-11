@@ -3,7 +3,25 @@ class Cilveks {
         this.vecums = age;
         this.vards = name;
         this.dzimums = sex;
+        
+        let rezultataVieta = document.getElementById("rezultats")
+
+        let cilvekaDiv = document.createElement("div")
+        this.infoVieta = document.createElement("p")
+        cilvekaDiv.appendChild(this.infoVieta)
+
+        let dzimsanasdienasPoga = document.createElement("button")
+        dzimsanasdienasPoga.innerHTML = "Dzimšanas Diena!"
+        dzimsanasdienasPoga.onclick = () => this.svinetDzD();
+
+        cilvekaDiv.appendChild(dzimsanasdienasPoga);
+
+        rezultataVieta.appendChild(cilvekaDiv);
+
+        
+        
         this.info();
+
     }
     svinetDzD(){
         this.vecums++;
@@ -37,9 +55,17 @@ class Cilveks {
             teksts += this.dzimums;
         }
         console.log(teksts)
+        this.infoVieta.innerHTML = teksts
     }
 
 
 }
 
-pirmais = new Cilveks(15, "Katrīna", "s")
+let visiCilveki = [];
+
+function izveidotCilveku(){
+    let vards = document.getElementById("vards").value
+    let dzimums = document.getElementById("dzimums").value
+    let vecums = document.getElementById("vecums").value
+    visiCilveki.push(new Cilveks(vecums, vards, dzimums))
+}
