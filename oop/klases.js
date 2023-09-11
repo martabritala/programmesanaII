@@ -8,7 +8,7 @@ class Cilveks {
     svinetDzD(){
         this.vecums++;
         this.info();
-    }
+    } 
     mainitVardu(jaunaisVards){
         this.vards = jaunaisVards;
         this.info();
