@@ -33,7 +33,6 @@ class Cilveks:
         else:
             print("Es esmu", self.dzimums)
 
-pirmais = Cilveks("Anna", 18, "s")
+    def __del__(self):   #Kas papildu jāizdara pirms objektu iznīcina, izmantojot del
+        print("Visu labu!")
 
-pirmais.mainit_dzimumu("nekatrs")
-pirmais.svinet_dz_d()
