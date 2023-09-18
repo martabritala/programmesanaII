@@ -3,7 +3,7 @@ class Cilveks:
         self.vecums = age
         self.vards = name
         self.dzimums = sex
-        self.info()
+        # self.info()
     
     def svinet_dz_d(self):
         self.vecums += 1
@@ -32,7 +32,23 @@ class Cilveks:
             print("Es esmu vīrietis")
         else:
             print("Es esmu", self.dzimums)
+        return
 
     def __del__(self):   #Kas papildu jāizdara pirms objektu iznīcina, izmantojot del
         print("Visu labu!")
 
+
+
+class Sieviete(Cilveks):
+    def __init__(self, name, age, hair_color):
+        super().__init__(name, age, "s")
+        self.__matu_krasa = hair_color
+        self.info()
+
+    def info(self):
+        super().info()
+        print("Mana matu krāsa ir", self.__matu_krasa)
+
+
+pirmais = Sieviete("Anna", 18, "blonda")
+print(pirmais._Sieviete__matu_krasa)
