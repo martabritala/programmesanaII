@@ -32,6 +32,7 @@ class List:
             ieprieksejais = ieprieksejais.next
            
         ieprieksejais.next = Node(jaunais_info, pec = ieprieksejais.next, pirms=ieprieksejais)
+        return ieprieksejais.next
         
     
     def read(self):
@@ -39,7 +40,58 @@ class List:
         while esosais:
             esosais.read()
             esosais = esosais.next
+        return
 
+    def get(self, index):
+        if index == 0:
+            return self.pirmais
+        esosais = self.pirmais
+        for i in range(index):
+            esosais = esosais.next
+        return esosais
+    
+    def put(self, ieliekama_node: Node, index):
+        turpinajums = self.get(index+1)
+        turpinajums.read()
+        if index == 0:
+            self.pirmais = ieliekama_node
+            self.pirmais.next = turpinajums
+            self.pirmais.next.prev = self.pirmais
+            return
+        
+        ieprieksejais = self.pirmais
+        for i in range(index-1):
+            ieprieksejais=ieprieksejais.next
+        
+        # ieprieksejais.read()
+
+        ieprieksejais.next = ieliekama_node
+        esosais = ieprieksejais.next
+        # esosais.read()
+        esosais.prev = ieprieksejais
+        esosais.next = turpinajums
+        # esosais.next.prev = esosais
+
+        return esosais
+
+        
+
+
+    def switch(self, index1, index2):
+        kopija_pirmais = self.get(index1)
+        print("kopija1:", index1)
+        kopija_pirmais.read()
+        kopija_otrais = self.get(index2)
+        print("kopija2:", index2)
+        kopija_otrais.read()
+        self.put(kopija_otrais, index1)
+        print("kopija1:", index1)
+        kopija_pirmais.read()
+        self.put(kopija_pirmais, index2)
+        return
+
+
+print("-------------**************---------")
 saraksts = List("suns")
 saraksts.add(24)
 saraksts.add("hei, visi!")
@@ -47,3 +99,10 @@ saraksts.add("pirmais", 0)
 saraksts.add("ceturtais", 3)
 saraksts.add("beigas",33)
 saraksts.read()
+print("----------")
+
+saraksts.put(Node("tests"),3)
+saraksts.read()
+print("----****************--")
+saraksts.switch(2,4)
+# saraksts.read()
