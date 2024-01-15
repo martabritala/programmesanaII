@@ -32,13 +32,50 @@ class List:
             ieprieksejais = ieprieksejais.next
            
         ieprieksejais.next = Node(jaunais_info, pec = ieprieksejais.next, pirms=ieprieksejais)
-        
+        return
     
     def read(self):
         esosais = self.pirmais
         while esosais:
             esosais.read()
             esosais = esosais.next
+        return
+    def get(self,index):
+        if index == 0:
+            return self.pirmais
+
+        esosais = self.pirmais
+        for i in range(index):
+            esosais = esosais.next
+
+        return esosais
+
+
+    def put(self, ieliekama_node: Node, index):
+        turpinajums = self.get(index+1)
+        if index == 0:
+            turpinajums = self.get(1)
+            self.pirmais = ieliekama_node
+            self.pirmais.next = turpinajums
+            self.pirmais.next.prev = self.pirmais
+            return self.pirmais
+
+        esosais = self.pirmais
+        for i in range(index-1):
+          esosais=esosais.next
+        ieprieksejais = esosais.prev
+        ieprieksejais.next = ieliekama_node
+        esosais.prev = ieprieksejais
+        esosais.next = turpinajums
+        esosais.next.prev = esosais
+    
+
+    def switch(self, index1, index2):
+        kopija_pirmais = self.get(index1)
+        kopija_otrais = self.get(index2)
+        self.put(kopija_otrais, index1)
+        self.put(kopija_pirmais, index2)
+        
 
 saraksts = List("suns")
 saraksts.add(24)
@@ -47,3 +84,5 @@ saraksts.add("pirmais", 0)
 saraksts.add("ceturtais", 3)
 saraksts.add("beigas",33)
 saraksts.read()
+saraksts.get(3).read(3)
+saraksts.switch(2,4)
