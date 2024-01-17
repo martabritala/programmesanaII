@@ -125,6 +125,22 @@ class List:
 
         return
 
+    def sort(self):
+        skaititajs = self.len()
+        for i in range(skaititajs):
+            testa_objekts = self.pirmais
+            testa_index = 0
+            while testa_objekts.next:
+                print(i, testa_index, end="")
+                self.get(testa_index).read()
+                if str(testa_objekts.info)[0]<str(testa_objekts.next.info)[0]:
+                    self.switch(testa_index,testa_index+1)
+                    testa_objekts = self.get(testa_index)
+                testa_objekts = testa_objekts.next
+                testa_index += 1
+        return 
+
+
 
 print("Sākotnējais saraksts:")
 saraksts = List("suns")
@@ -132,12 +148,17 @@ saraksts.add(24)
 saraksts.add("hei, visi!")
 saraksts.add("pirmais", 0)
 saraksts.add("ceturtais", 3)
-saraksts.add("beigas",5)
+saraksts.add("beigas",33)
 saraksts.read()
 print("Nomainīts elements pie indeksa 3:")
 
 saraksts.put(Node("tests"),3)
 saraksts.read()
-print("Apmainīti vietām elementi pie indeksa 5 un 0:")
-saraksts.switch(5,0)
+print("Apmainīti vietām elementi pie indeksa 0 un 2:")
+saraksts.switch(2,0)
 saraksts.read()
+
+print("Sakārtots:")
+saraksts.sort()
+saraksts.read()
+
