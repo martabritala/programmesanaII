@@ -131,8 +131,8 @@ class List:
             testa_objekts = self.pirmais
             testa_index = 0
             while testa_objekts.next:
-                print(i, testa_index, end="")
-                self.get(testa_index).read()
+                # print(i, testa_index, end="")
+                # self.get(testa_index).read()
                 if str(testa_objekts.info)[0]<str(testa_objekts.next.info)[0]:
                     self.switch(testa_index,testa_index+1)
                     testa_objekts = self.get(testa_index)
