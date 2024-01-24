@@ -31,19 +31,20 @@ def dabut_info(datne):
     tabulas = galvena_dala.find_all('table')
 
     rindas = tabulas[2].find_all('tr')
-    # print(rindas[0])
-    for rinda in rindas[2:]:
+    for rinda in rindas[1:-1]: # Vai arī [1:] un tad jāizmanto 36-38 rinda
         lauki = rinda.find_all('td')
-        if len(lauki)<8:
-            continue
-        # print(lauki)
+        # if len(lauki)<8:
+        #     print('izlaist')
+        #     continue
         auto = {}
         auto['sludinajuma_saite'] = lauki[1].find('a')['href']
-        print(auto['sludinajuma_saite']) 
-    return
+        auto['bilde'] = lauki[1].find('img')['src']
+        print(auto)
+        dati.append(auto)
+    return dati
 
 
 
-dabut_info(LAPAS+"pirma.html")
+print(dabut_info(LAPAS+"pirma.html"))
 
 
