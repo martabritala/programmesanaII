@@ -39,7 +39,6 @@ def dabut_info(datne):
         auto = {}
         auto['sludinajuma_saite'] = lauki[1].find('a')['href']
         auto['bilde'] = lauki[1].find('img')['src']
-        print(auto)
         dati.append(auto)
     return dati
 
