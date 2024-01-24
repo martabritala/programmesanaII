@@ -30,11 +30,20 @@ def dabut_info(datne):
 
     tabulas = galvena_dala.find_all('table')
 
-    rindas = tabulas[1].find_all('tr')
+    rindas = tabulas[2].find_all('tr')
+    # print(rindas[0])
+    for rinda in rindas[2:]:
+        lauki = rinda.find_all('td')
+        if len(lauki)<8:
+            continue
+        # print(lauki)
+        auto = {}
+        auto['sludinajuma_saite'] = lauki[1].find('a')['href']
+        print(auto['sludinajuma_saite']) 
+    return
 
-    print(rindas)
 
 
-
+dabut_info(LAPAS+"pirma.html")
 
 
