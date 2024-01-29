@@ -31,11 +31,11 @@ def dabut_info(datne):
     tabulas = galvena_dala.find_all('table')
 
     rindas = tabulas[2].find_all('tr')
-    for rinda in rindas[1:-1]: # Vai arī [1:] un tad jāizmanto 36-38 rinda
+    for rinda in rindas[1:]: # Vai arī [1:-1] un tad jāizņem 36-38 rinda
         lauki = rinda.find_all('td')
-        # if len(lauki)<8:
-        #     print('izlaist')
-        #     continue
+        if len(lauki)<8:
+            print('neatbilstošs datu skaits')
+            continue
         auto = {}
         auto['sludinajuma_saite'] = lauki[1].find('a')['href']
         auto['bilde'] = lauki[1].find('img')['src']
@@ -43,7 +43,33 @@ def dabut_info(datne):
     return dati
 
 
+def saglaba_datus(dati):
+    with open(DATI+"sslv.csv", "w", encoding='utf-8') as f:
+        lauku_nosaukumi = ['sludinajuma_saite','bilde']
+        w = csv.DictWriter(f, fieldnames= lauku_nosaukumi)
+        w.writeheader()
+        for auto in dati:
+            w.writerow(auto)
+    return
 
-print(dabut_info(LAPAS+"pirma.html"))
+
+# saglaba_datus(dabut_info(LAPAS+"pirma.html"))
 
 
+def atvilkt_lapas(skaits):
+    for i in range(1,skaits+1):
+        saglaba("{}page{}.html".format(URL, i), "{}lapa{}.html".format(LAPAS, i))
+        time.sleep(1)
+    return
+
+
+def dabut_info_daudz(skaits):
+    visi_dati = []
+    for i in range(1, skaits+1):
+        dati = dabut_info("{}lapa{}.html".format(LAPAS,i))
+        visi_dati += dati
+    return visi_dati
+
+# atvilkt_lapas(5)
+info = dabut_info_daudz(5)
+saglaba_datus(info)
