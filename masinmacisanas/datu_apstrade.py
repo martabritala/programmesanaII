@@ -24,8 +24,8 @@ def datu_biezums(datne, kolonna):
 
 
 datne1 = 'masinmacisanas/dati/auto_simple.csv'
-datne2 = 'masinmacisanas/dati/auto_imports.csv'
+datne2 = 'dati/auto_imports.csv'
 
-# karstuma_karte(datne2)
-datu_biezums(datne2, "price")
+karstuma_karte(datne2)
+#datu_biezums(datne2, "price")
 

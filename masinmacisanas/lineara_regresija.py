@@ -5,11 +5,17 @@ import seaborn as sb
 import pickle
 
 from termcolor import colored as cl
-
+# pip install -U scikit-learn
 from sklearn.model_selection import train_test_split
 
-#Modeļi
+#Modeļi (algoritmi)
 from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Ridge
+from sklearn.linear_model import Lasso
+from sklearn.linear_model import BayesianRidge
+from sklearn.linear_model import ElasticNet
+from sklearn import ensemble #Labāki algoritmi
+
 
 #Modeļu analīze
 from sklearn.metrics import explained_variance_score as evs
@@ -19,6 +25,8 @@ from sklearn.metrics import r2_score as r2
 
 def sagatavot_datus(datne, kolonna_x, kolonna_y):
     datu_fails = pd.read_csv(datne)
+    datu_fails.dropna(inplace=True)
+    # parverst_kolonnu(datu_fails, kolonna_x)
     X_var = datu_fails[kolonna_x].values
     y_var = datu_fails[kolonna_y].values
 
@@ -47,15 +55,36 @@ datne1 = "dati/auto_simple.csv"
 kol_x1 = ['Volume', 'Weight']
 kol_y1 = ['CO2']
 
+datne2 = "dati/auto_imports.csv"
+kol_x2 = ['horsepower','highway-mpg', 'length']
+kol_y2 = ['price']
+
+
 #Sagatavot datus
-X_train, X_test, y_train, y_test = sagatavot_datus(datne1, kol_x1, kol_y1)
+# X_train, X_test, y_train, y_test = sagatavot_datus(datne1, kol_x1, kol_y1)
+X_train, X_test, y_train, y_test = sagatavot_datus(datne2, kol_x2, kol_y2)
 
 #Sagatavot modeli
-modelis = LinearRegression()
+# modelis = LinearRegression()
+# modelis = Ridge()
+# modelis = Lasso()
+# modelis = BayesianRidge()
+# modelis = ElasticNet()
+modelis = ensemble.GradientBoostingRegressor()
 
 modelis, rezultats = trenet_modeli(modelis, X_train, y_train, X_test)
 
 modela_kvalitate(y_test, rezultats)
 
+dati1 = [1600, 1390]
+dati1_rez = 108
+
+dati2 = [111, 27, 168.8]
+dati2_rez = 13495
+
+# prognoze = prognozejam_rezultatu(modelis, [dati1])
+prognoze = prognozejam_rezultatu(modelis, [dati2])
+
+print(prognoze, dati2_rez)
 
 
